@@ -103,9 +103,69 @@ def value_iteration(mdp, gamma, epsilon):
         A python dictionary, with state (x, y) tuples as keys, and converged utilities as values.
     """
 
-    "*** YOUR CODE HERE***"
-    pass
+    S = mdp.get_states()
+    U = {}
+    for i in S:
+        u = {i:0}
+        U.update(u)
 
+    while True:
+        delta = 0
+        Uprime = U.copy()
+
+        for state in S:
+            #Make Uprime, need to get the max of the actions
+            # Multiply max action by gamma
+            # Add the reward for this state
+            A = mdp.get_actions(state) # actions from this state
+            Aprime = [] # empty list to store the actions possible from this state
+            for action in A:
+                # Probability of going to next state given current state and action  * U of next stat
+                expected_U_s = something * U[action]
+
+            Uprime = mdp.get_reward(state) + gamma * max(Aprime)
+            delta = max(delta, change_in_U(mdp, Uprime, U))
+        if delta < epsilon:
+            break
+    return U
+
+    #
+    # tracker = 0
+    #
+    # while True:
+    #     current_utility = utilities.copy() # make another version of util
+    #     change = 0
+    #
+    #     for i in states:
+    #         actions = []
+    #         for j in mdp.get_actions(i):
+    #             next_utility = 0
+    #             for next_state in states:
+    #                 expected_utility = mdp.get_successor_probs(next_state, j) * utilities[next_state]
+    #                 next_utility += expected_utility
+    #             actions.append(next_utility)
+    #
+    #             cur_utilities[state] = mdp.get_reward(state) + gamma * max(action_utilities)
+    #
+    #             delta = max(delta, change_utility(mdp, cur_utilities, prev_utilities))
+    #             prev_utilities = cur_utilities
+    #
+    #             tracker += 1
+    #
+    #             if delta < epsilon:
+    #                 break
+    #
+    #         return cur_utilities
+
+def change_in_U(mdp, Uprime, U):
+    # Helper function to get new delta for each iteration
+
+    max_diff = 0
+    for state in mdp.get_states():
+        diff = Uprime[state] - U[state]
+        if diff > max_diff:
+            max_diff = diff
+    return max_diff
 
 def derive_policy(mdp, utility):
     """Create a policy from an MDP and a set of utilities for each state.
