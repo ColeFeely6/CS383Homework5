@@ -121,41 +121,17 @@ def value_iteration(mdp, gamma, epsilon):
             Aprime = [] # empty list to store the actions possible from this state
             for action in A:
                 # Probability of going to next state given current state and action  * U of next stat
-                expected_U_s = something * U[action]
+                moves = mdp.get_successor_probs(state, action) # Dictionary of {Move: Prob}
+                for move in moves:
+                    prob_of_move = moves[move]
+                    expected_U_s = prob_of_move * U[action]
+                    Aprime.append(expected_U_s)
 
             Uprime = mdp.get_reward(state) + gamma * max(Aprime)
             delta = max(delta, change_in_U(mdp, Uprime, U))
         if delta < epsilon:
             break
     return U
-
-    #
-    # tracker = 0
-    #
-    # while True:
-    #     current_utility = utilities.copy() # make another version of util
-    #     change = 0
-    #
-    #     for i in states:
-    #         actions = []
-    #         for j in mdp.get_actions(i):
-    #             next_utility = 0
-    #             for next_state in states:
-    #                 expected_utility = mdp.get_successor_probs(next_state, j) * utilities[next_state]
-    #                 next_utility += expected_utility
-    #             actions.append(next_utility)
-    #
-    #             cur_utilities[state] = mdp.get_reward(state) + gamma * max(action_utilities)
-    #
-    #             delta = max(delta, change_utility(mdp, cur_utilities, prev_utilities))
-    #             prev_utilities = cur_utilities
-    #
-    #             tracker += 1
-    #
-    #             if delta < epsilon:
-    #                 break
-    #
-    #         return cur_utilities
 
 def change_in_U(mdp, Uprime, U):
     # Helper function to get new delta for each iteration
