@@ -120,18 +120,20 @@ def value_iteration(mdp, gamma, epsilon):
             A = mdp.get_actions(state) # actions from this state
             Aprime = [] # empty list to store the actions possible from this state
             for action in A:
-                # Probability of going to next state given current state and action  * U of next stat
-                moves = mdp.get_successor_probs(state, action) # Dictionary of {Move: Prob}
-                for move in moves:
-                    prob_of_move = moves[move]
-                    expected_U_s = prob_of_move * U[action]
-                    Aprime.append(expected_U_s)
+                # Probability of going to next state given current state and action  * U of next state
+                U_of_s_prime = 0
+                for sprime in S:
+                    expected_U_s = mdp.get_successor_probs(state, action) * U[action]
+                    U_of_s_prime += expected_U_s
+                Aprime.append(U_of_s_prime)
 
             Uprime = mdp.get_reward(state) + gamma * max(Aprime)
-            delta = max(delta, change_in_U(mdp, Uprime, U))
+        delta = max(delta, change_in_U(mdp, Uprime, U))
+        U = Uprime # set up next iteration
         if delta < epsilon:
             break
-    return U
+    return Uprime
+
 
 def change_in_U(mdp, Uprime, U):
     # Helper function to get new delta for each iteration
