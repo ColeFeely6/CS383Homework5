@@ -111,23 +111,25 @@ def value_iteration(mdp, gamma, epsilon):
 
     while True:
         delta = 0
-        Uprime = U.copy()
+        Uprime = U.copy() #updated Utilities for the round
 
         for state in S:
-            #Make Uprime, need to get the max of the actions
-            # Multiply max action by gamma
-            # Add the reward for this state
             A = mdp.get_actions(state) # actions from this state
             Aprime = [] # empty list to store the actions possible from this state
             for action in A:
                 # Probability of going to next state given current state and action  * U of next state
                 U_of_s_prime = 0
-                for sprime in S:
-                    expected_U_s = mdp.get_successor_probs(state, action) * U[sprime]
-                    U_of_s_prime += expected_U_s
+
+                nextstates = mdp.get_successor_probs(state, action)
+                for move, prob in nextstates.items(): #move is sprime, iterate through the items
+                    expected_u_s = prob * U[move]
+                    U_of_s_prime += expected_u_s
                 Aprime.append(U_of_s_prime)
 
-            Uprime = mdp.get_reward(state) + gamma * max(Aprime)
+            return_value = mdp.get_reward(state) + gamma * max(Aprime)
+
+            #update the Uprime with the new value at that state
+            Uprime[state] = return_value
         delta = max(delta, change_in_U(mdp, Uprime, U))
         U = Uprime # set up next iteration
         if delta < epsilon:
