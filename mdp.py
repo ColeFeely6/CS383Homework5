@@ -123,7 +123,7 @@ def value_iteration(mdp, gamma, epsilon):
                 # Probability of going to next state given current state and action  * U of next state
                 U_of_s_prime = 0
                 for sprime in S:
-                    expected_U_s = mdp.get_successor_probs(sprime, action) * U[sprime]
+                    expected_U_s = mdp.get_successor_probs(state, action) * U[sprime]
                     U_of_s_prime += expected_U_s
                 Aprime.append(U_of_s_prime)
 
