@@ -33,7 +33,7 @@ def q1_and_2():
     discount_factor = 0.9
     utilities, policy = gen_results(gridworld, discount_factor, EPSILON)
 
-    num_convergance_utility= None
+    num_convergance_utility= 10
     num_convergance_policy= None
 
     return {"gridworld": gridworld, "EPSILON": EPSILON,

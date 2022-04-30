@@ -126,12 +126,14 @@ def value_iteration(mdp, gamma, epsilon):
                 for move, prob in nextstates.items(): #move is sprime, iterate through the items
                     expected_u_s = prob * U[move]
                     U_of_s_prime += expected_u_s
+                #POLICY will be the argmax of the Prob(sprime|s,a)*U[sprime
                 Aprime.append(U_of_s_prime)
-
             return_value = mdp.get_reward(state) + gamma * max(Aprime)
+
 
             #update the Uprime with the new value at that state
             Uprime[state] = return_value
+        print("policy: ", max(Aprime))
         delta = max(delta, change_in_U(mdp, Uprime, U))
         U = Uprime # set up next iteration
         if delta < epsilon:
