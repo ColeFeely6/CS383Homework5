@@ -1,6 +1,7 @@
 import mdp
 import traceback
 
+#TODO Change the given example to see what's wrong
 
 """
 Carefully read the Homework 5 Coding pdf to understand what to implement in
@@ -16,9 +17,20 @@ def q1_and_2():
     """
     print('\n'+('─' * 50))
     print("Question 1 and 2")
-    gridworld = None
-    EPSILON = None
-    discount_factor = None
+    gridworld = mdp.MDP(3, 2,
+                    rewards={
+                        (1, 1): -1,
+                        (1, 2): -5,
+                        (2, 1): -1,
+                        (2, 2): -1,
+                        (2, 3): -1,
+                        (3, 1): -1,
+                        (1, 3): 10,
+                              },
+                    terminals=[(1, 3), (2, 3)],
+                    prob_forw=0.8)
+    EPSILON = 0.01
+    discount_factor = 0.9
     utilities, policy = gen_results(gridworld, discount_factor, EPSILON)
 
     num_convergance_utility= None
@@ -152,7 +164,15 @@ if __name__ == "__main__":
     "***Usage example***"
     print("Given Example")
     gridworld_example = mdp.MDP(3, 2,
-                    rewards={ (1, 3): -2, (2, 3): 2},
+                    rewards={
+                        (1, 1): -1,
+                        (1, 2): -5,
+                        (2, 1): -1,
+                        (2, 2): -1,
+                        (2, 3): -1,
+                        (3, 1): -1,
+                        (1, 3): 10,
+                              },
                     terminals=[(1, 3), (2, 3)],
                     prob_forw=0.8)
     EPSILON = 0.01

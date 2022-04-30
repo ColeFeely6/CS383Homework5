@@ -108,11 +108,13 @@ def value_iteration(mdp, gamma, epsilon):
     for i in S:
         u = {i:0}
         U.update(u)
-
+    count = 0
     while True:
         delta = 0
         Uprime = U.copy() #updated Utilities for the round
-
+        print("Iteration: ", count)
+        print("Utilities: \n", ascii_grid_utils(Uprime))
+        count += 1
         for state in S:
             A = mdp.get_actions(state) # actions from this state
             Aprime = [] # empty list to store the actions possible from this state
