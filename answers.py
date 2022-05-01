@@ -27,7 +27,7 @@ def q1_and_2():
                         (3, 1): -1,
                         (1, 3): 10,
                               },
-                    terminals=[(1, 3), (2, 3)],
+                    terminals=[(1, 3)],
                     prob_forw=0.8)
     EPSILON = 0.01
     discount_factor = 0.9
@@ -59,7 +59,7 @@ def q3():
                             (3, 1): -1,
                             (1, 3): 10,
                         },
-                        terminals=[(1, 3), (2, 3)],
+                        terminals=[(1, 3)],
                         prob_forw=0.8)
     EPSILON = 0.01
     discount_factor = 0.9
@@ -82,11 +82,21 @@ def q4():
     """
     print('\n'+('─' * 50))
     print("Question 4")
-    gridworld = None
-    EPSILON = None
-    discount_factor = None
+    gridworld = mdp.MDP(3, 2,
+                        rewards={
+                            (1, 1): -1,
+                            (1, 2): -5,
+                            (2, 1): -1,
+                            (2, 2): -1,
+                            (2, 3): -1,
+                            (3, 1): -1,
+                            (1, 3): 10,
+                        },
+                        terminals=[(1, 3)],
+                        prob_forw=0.5)
+    EPSILON = 0.01
+    discount_factor = 0.9
     utilities, policy = gen_results(gridworld, discount_factor, EPSILON)
-
     """
     Enter one of the following answer choices below: "a", "b", "c", "d"
     """
@@ -104,9 +114,20 @@ def q5():
     """
     print('\n'+('─' * 50))
     print("Question 5")
-    gridworld = None
-    EPSILON = None
-    discount_factor = None
+    gridworld = mdp.MDP(3, 2,
+                        rewards={
+                            (1, 1): -1,
+                            (1, 2): -5,
+                            (2, 1): -1,
+                            (2, 2): -1,
+                            (2, 3): -1,
+                            (3, 1): -1,
+                            (1, 3): 10,
+                        },
+                        terminals=[(1, 3)],
+                        prob_forw=0.8)
+    EPSILON = 0.01
+    discount_factor = 0.6
     utilities, policy = gen_results(gridworld, discount_factor, EPSILON)
 
     """
