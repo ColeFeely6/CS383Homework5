@@ -49,15 +49,26 @@ def q3():
     """
     print('\n'+('─' * 50))
     print("Question 3")
-    gridworld = None
-    EPSILON = None
-    discount_factor = None
+    gridworld = mdp.MDP(3, 2,
+                        rewards={
+                            (1, 1): -1,
+                            (1, 2): -100,
+                            (2, 1): -1,
+                            (2, 2): -1,
+                            (2, 3): -1,
+                            (3, 1): -1,
+                            (1, 3): 10,
+                        },
+                        terminals=[(1, 3), (2, 3)],
+                        prob_forw=0.8)
+    EPSILON = 0.01
+    discount_factor = 0.9
     utilities, policy = gen_results(gridworld, discount_factor, EPSILON)
 
     """
     Enter one of the following answer choices below: "a", "b", "c", "d"
     """
-    changed_policy_answer = None
+    changed_policy_answer = 'b'
 
     return {"gridworld": gridworld, "EPSILON": EPSILON,
         "discount_factor": discount_factor,"utilities": utilities,
