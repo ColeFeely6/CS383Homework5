@@ -34,7 +34,7 @@ def q1_and_2():
     utilities, policy = gen_results(gridworld, discount_factor, EPSILON)
 
     num_convergance_utility= 10
-    num_convergance_policy= None
+    num_convergance_policy= 6
 
     return {"gridworld": gridworld, "EPSILON": EPSILON,
         "discount_factor": discount_factor, "utilities": utilities,
