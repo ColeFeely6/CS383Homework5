@@ -130,7 +130,7 @@ def value_iteration(mdp, gamma, epsilon):
                 Aprime.append(U_of_s_prime)
 
             #print("policy: ", mdp.derive_policy(Uprime))
-            print("policy: ", max(Aprime))
+            #print("policy: ", max(Aprime))
             return_value = mdp.get_reward(state) + gamma * max(Aprime)
 
 
