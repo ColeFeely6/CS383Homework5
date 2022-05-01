@@ -68,7 +68,7 @@ def q3():
     """
     Enter one of the following answer choices below: "a", "b", "c", "d"
     """
-    changed_policy_answer = 'b'
+    changed_policy_answer = 'a'
 
     return {"gridworld": gridworld, "EPSILON": EPSILON,
         "discount_factor": discount_factor,"utilities": utilities,
