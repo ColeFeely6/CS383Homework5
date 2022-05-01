@@ -129,7 +129,8 @@ def value_iteration(mdp, gamma, epsilon):
                 #POLICY will be the argmax of the Prob(sprime|s,a)*U[sprime】
                 Aprime.append(U_of_s_prime)
 
-            #print("policy: ", max(Aprime))
+            #print("policy: ", mdp.derive_policy(Uprime))
+            print("policy: ", max(Aprime))
             return_value = mdp.get_reward(state) + gamma * max(Aprime)
 
 
